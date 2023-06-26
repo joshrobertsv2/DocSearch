@@ -78,9 +78,7 @@ export function SearchDialog() {
         <DialogContent className="sm:max-w-[850px] text-black">
           <DialogHeader>
             <DialogTitle>OpenAI powered doc search</DialogTitle>
-            <DialogDescription>
-              Build your own ChatGPT style search with Next.js, OpenAI & Supabase.
-            </DialogDescription>
+            <DialogDescription>Documents on demand.</DialogDescription>
             <hr />
             <button className="absolute top-0 right-2 p-2" onClick={() => setOpen(false)}>
               <X className="h-4 w-4 dark:text-gray-100" />
