@@ -1,5 +1,5 @@
 {
-  "name": "supabase-with-openai",
+  "name": "doc-x",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,7 +9,7 @@
     "lint": "next lint",
     "format": "prettier --write \"./**/*.{js,jsx,ts,tsx,css,md,json}\"",
     "embeddings": "tsx lib/generate-embeddings.ts",
-    "embeddings:refresh": "tsx lib/generate-embeddings.ts --refresh"
+    "refresh": "tsx lib/generate-embeddings.ts --refresh"
   },
   "prettier": {
     "trailingComma": "es5",
