@@ -102,6 +102,9 @@ export default async function handler(req: NextRequest) {
     if (matchError) {
       throw new ApplicationError('Failed to match page sections', matchError)
     }
+    // Log the number of page sections
+    console.log(`Number of page sections: ${pageSections.length}`)
+
     // Tokenize the matched page sections and prepare the context text
     const tokenizer = new GPT3Tokenizer({ type: 'gpt3' })
     let tokenCount = 0
