@@ -119,7 +119,7 @@ export function SearchDialog() {
                     <Wand width={18} className="text-white" />
                   </span>
                   <h3 className="font-semibold">Answer:</h3>
-                  {completion}
+                  <div dangerouslySetInnerHTML={{ __html: completion.replace(/\n/g, '<br/>') }} />
                 </div>
               ) : null}
 

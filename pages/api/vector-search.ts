@@ -129,7 +129,7 @@ export default async function handler(req: NextRequest) {
           documentation, answer the question using that information,
           outputted in markdown format. If you are unsure and the answer
           is not explicitly written in the documentation, say
-          "I was unable to find an answer in organization's documentation, but you may find this helpful:"
+          "I was unable to find an answer in organization's documentation, but you may find this helpful: "
         `,
       },
       {
@@ -147,6 +147,7 @@ export default async function handler(req: NextRequest) {
       model: 'gpt-4',
       stream: true,
       messages,
+      temperature: 0.7,
     })
 
     if (!response.ok) {
@@ -156,7 +157,6 @@ export default async function handler(req: NextRequest) {
 
     // Transform the response into a readable stream
     const stream = OpenAIStream(response)
-
     // Return a StreamingTextResponse, which can be consumed by the client
     return new StreamingTextResponse(stream)
   } catch (err: unknown) {
