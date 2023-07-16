@@ -1,6 +1,6 @@
 import type { NextRequest } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
-import { codeBlock, oneLine } from 'common-tags'
+import { oneLine } from 'common-tags'
 import GPT3Tokenizer from 'gpt3-tokenizer'
 import {
   Configuration,
@@ -173,7 +173,7 @@ export default async function handler(req: NextRequest) {
       )
     } else if (err instanceof ApplicationError) {
       // Print out application errors with their additional data
-      console.error(`${err.message}: ${JSON.stringify(err.data)}`)
+      console.error(`${err.message}`)
     } else {
       // Print out unexpected errors as is to help with debugging
       console.error(err)
