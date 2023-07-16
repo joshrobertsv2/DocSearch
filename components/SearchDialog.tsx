@@ -75,7 +75,7 @@ export function SearchDialog() {
         </kbd>{' '}
       </button>
       <Dialog open={open}>
-        <DialogContent className="sm:max-w-[850px] text-black">
+        <DialogContent className="sm:max-w-[850px] text-black max-h-[500px] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>OpenAI powered doc search</DialogTitle>
             <DialogDescription>Documents on demand.</DialogDescription>

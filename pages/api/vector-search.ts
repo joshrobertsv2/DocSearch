@@ -7,6 +7,7 @@ import {
   OpenAIApi,
   CreateModerationResponse,
   CreateEmbeddingResponse,
+  type ChatCompletionRequestMessage,
 } from 'openai-edge'
 import { OpenAIStream, StreamingTextResponse } from 'ai'
 import { ApplicationError, UserError } from '@/lib/errors'
@@ -119,33 +120,33 @@ export default async function handler(req: NextRequest) {
       contextText += `${content.trim()}\n---\n`
     }
     // Construct the prompt for the OpenAI API
-    const prompt = codeBlock`
-      ${oneLine`
-        You are a very enthusiastic technical support engineer who loves
-        to help software developers! Given the following sections from the Organizations
-        documentation, answer the question using that information,
-        outputted in markdown format. If you are unsure and the answer
-        is not explicitly written in the documentation, say
-        "I was unable to find an answer in organization's documentation, but you may find this helpful:"
-      `}
-
-      Context sections:
-      ${contextText}
-
-      Question: """
-      ${sanitizedQuery}
-      """
-
-      Answer as markdown (including related code snippets if available):
-    `
+    const messages = [
+      {
+        role: 'system',
+        content: oneLine`
+          You are a very enthusiastic technical support engineer who loves
+          to help software developers! Given the following sections from the Organizations
+          documentation, answer the question using that information,
+          outputted in markdown format. If you are unsure and the answer
+          is not explicitly written in the documentation, say
+          "I was unable to find an answer in organization's documentation, but you may find this helpful:"
+        `,
+      },
+      {
+        role: 'user',
+        content: contextText,
+      },
+      {
+        role: 'user',
+        content: sanitizedQuery,
+      },
+    ] as ChatCompletionRequestMessage[]
 
     // Generate the completion using the OpenAI API
-    const response = await openai.createCompletion({
-      model: 'text-davinci-003',
-      prompt,
-      max_tokens: 512,
-      temperature: 0,
+    const response = await openai.createChatCompletion({
+      model: 'gpt-4',
       stream: true,
+      messages,
     })
 
     if (!response.ok) {
