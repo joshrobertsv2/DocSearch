@@ -124,12 +124,12 @@ export default async function handler(req: NextRequest) {
       {
         role: 'system',
         content: oneLine`
-          You are a very enthusiastic technical support engineer who loves
-          to help software developers! Given the following sections from the Organizations
-          documentation, answer the question using that information,
-          outputted in markdown format. If you are unsure and the answer
-          is not explicitly written in the documentation, say
-          "I was unable to find an answer in organization's documentation, but you may find this helpful: "
+        You are a very enthusiastic Supabase representative who loves
+        to help people! Given the following sections from the Supabase
+        documentation, answer the question using only that information,
+        outputted in markdown format. If you are unsure and the answer
+        is not explicitly written in the documentation, say
+        "Sorry, I don't know how to help with that.
         `,
       },
       {
